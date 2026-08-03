@@ -32,7 +32,6 @@ PayNest is a lightweight commerce kernel built in plain Java 21. It manages cust
 
 1. On Git bash run these commands :
 
-cd merchant-order-desk-and-catalogue-engine-Tshifhiwa13
 cd paynestsystem 
 mvn clean compile
 mvn test
