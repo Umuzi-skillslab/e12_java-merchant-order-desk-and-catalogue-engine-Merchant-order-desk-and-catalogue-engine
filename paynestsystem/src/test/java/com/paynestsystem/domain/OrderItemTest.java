@@ -9,7 +9,7 @@ public class OrderItemTest {
 
     @Test
     void testCalculateTotal() {
-        Product nails = new Product(1, "Box of Nails", 120);
+        Product nails = new Product(1, "Box of Nails", BigDecimal.valueOf(120));
         OrderItem item = new OrderItem(nails, 3);
 
         // Use compareTo to ignore scale differences (360 vs 360.0)
@@ -19,7 +19,7 @@ public class OrderItemTest {
 
     @Test
     void testInvalidQuantityThrowsException() {
-        Product hammer = new Product(1, "Hammer", 150);
+        Product hammer = new Product(1, "Hammer", BigDecimal.valueOf(150));
 
         assertThrows(IllegalArgumentException.class,
             () -> new OrderItem(hammer, 0),

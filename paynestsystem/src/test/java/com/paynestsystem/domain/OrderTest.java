@@ -10,13 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 class OrderTest {
     @Test
     void calculateTotalAddsAllLineSubtotals() {
         Customer customer = new Customer(1, "Tshifhiwa Makherana", "Fifi@example.org");
-        Product hammer = new Product(1, "Hammer", 150);
-        Product drill = new Product(2, "Electric Drill", 2000);
-        Product nails = new Product(3, "Box of Nails", 120);
+        Product hammer = new Product(1, "Hammer", BigDecimal.valueOf(150));
+        Product drill = new Product(2, "Electric Drill", BigDecimal.valueOf(2000));
+        Product nails = new Product(3, "Box of Nails", BigDecimal.valueOf(120));
        Order order =new Order (35, customer);
 
         order.addItem(hammer, 1);
@@ -30,16 +32,28 @@ class OrderTest {
     @Test
     void addItemRejectsInvalidQuantity() {
         Customer customer = new Customer(1, "Tshifhiwa Makherana", "Fifi@example.org");
-        Product hammer = new Product(1, "Hammer", 150);
+        Product hammer = new Product(1, "Hammer", BigDecimal.valueOf(150));
         Order order = new Order(35, customer);
 
         assertThrows(IllegalArgumentException.class, () -> order.addItem(hammer, 0));
     }
 
     @Test
+    void getItemsReturnsUnmodifiableList() {
+        Customer customer = new Customer(1, "Tshifhiwa Makherana", "Fifi@example.org");
+        Product hammer = new Product(1, "Hammer", BigDecimal.valueOf(150));
+        Order order = new Order(35, customer);
+        order.addItem(hammer, 1);
+
+        List<OrderItem> items = order.getItems();
+
+        assertThrows(UnsupportedOperationException.class, () -> items.add(new OrderItem(hammer, 1)));
+    }
+
+    @Test
     void printSummaryShowsInvoiceDetails() {
         Customer customer = new Customer(1, "Tshifhiwa Makherana", "Fifi@example.org");
-        Product hammer = new Product(1, "Hammer", 150);
+        Product hammer = new Product(1, "Hammer", BigDecimal.valueOf(150));
         Order order = new Order(35, customer);
         order.addItem(hammer, 1);
 

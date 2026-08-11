@@ -2,6 +2,7 @@ package com.paynestsystem.domain;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Order {
@@ -29,7 +30,7 @@ public class Order {
     }
 
     public List<OrderItem> getItems() {
-        return items; 
+        return Collections.unmodifiableList(items);
     }
 
     
@@ -50,10 +51,5 @@ public class Order {
             total = total.add(item.calculateTotal());
         }
         return total;
-    }
-
-
-    public void printSummary() {
-        new com.paynestsystem.service.OrderSummary().printSummary(this);
     }
 }

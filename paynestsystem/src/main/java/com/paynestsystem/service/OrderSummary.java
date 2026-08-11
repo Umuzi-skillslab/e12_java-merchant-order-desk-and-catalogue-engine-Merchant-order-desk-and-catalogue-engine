@@ -2,6 +2,11 @@ package com.paynestsystem.service;
 
 import com.paynestsystem.domain.*;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 public class OrderSummary {
 
     public void printSummary(Order order) {
@@ -21,15 +26,20 @@ public class OrderSummary {
         System.out.println("=======================================");
 
         for (OrderItem item : order.getItems()) {
-            System.out.printf("%-20s %-10d %.2f%n",
+            System.out.printf("%-20s %-10d %s%n",
                 item.getProduct().getName(),
                 item.getQuantity(),
-                item.calculateTotal());
+                formatAmount(item.calculateTotal()));
         }
 
         System.out.println("=======================================");
-        System.out.printf("%-31s %.2f%n", "Total Amount:", order.calculateTotal());
+        System.out.printf("%-31s %s%n", "Total Amount:", formatAmount(order.calculateTotal()));
         System.out.println("=======================================.");
     }
-}
 
+    private String formatAmount(BigDecimal amount) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.ROOT);
+        symbols.setDecimalSeparator(',');
+        return new DecimalFormat("0.00", symbols).format(amount);
+    }
+}
