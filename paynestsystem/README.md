@@ -2,7 +2,7 @@
 
 # Overview
 
-PayNest is a lightweight commerce kernel built in plain Java 21. It manages customers, products, and orders with clear domain objects and demonstrates solid Object‑Oriented Programming (OOP) principles. The design emphasizes separation of concerns: domain classes handle data and rules, while the service layer manages presentation and formatting.
+PayNest is a lightweight commerce kernel built in plain Java 25. It manages customers, products, and orders with clear domain objects and demonstrates solid Object‑Oriented Programming (OOP) principles. The design emphasizes separation of concerns: domain classes handle data and rules, while the service layer manages presentation and formatting.
 
 # Project Structure
 
